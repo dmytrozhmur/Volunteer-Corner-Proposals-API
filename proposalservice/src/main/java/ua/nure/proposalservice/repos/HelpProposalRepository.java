@@ -1,6 +1,7 @@
 package ua.nure.proposalservice.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import ua.nure.proposalservice.model.UserHelpProposal;
 
-public interface HelpProposalRepository implements JpaRepository<User, String> {
+public interface HelpProposalRepository extends JpaRepository<UserHelpProposal, String> {
 }
