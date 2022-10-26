@@ -3,14 +3,15 @@ package ua.nure.proposalservice.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
 import java.util.List;
 
 @Getter
 @Setter
+@Entity(name = "AspNetUsers")
 public class User {
-    private String id;
-    private String name;
-    private String surname;
+    private String firstName;
+    private String lastName;
     private String patronymic;
     private String login;
     private String email;
