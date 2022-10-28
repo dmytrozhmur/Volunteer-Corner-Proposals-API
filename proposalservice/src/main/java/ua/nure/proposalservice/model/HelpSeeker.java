@@ -4,20 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.List;
 
+import java.time.LocalDateTime;
 @Getter
 @Setter
-@Entity(name = "HelpProposals")
-public class HelpProposal {
+@Entity(name = "HelpSeekers")
+public class HelpSeeker {
     @Id
     @Column(name = "Id", nullable = false, length = 450) private String id;
-    @OneToMany
-    @Column(name = "OwnerId")
-    List<Volunteer> volunteer;
-    @Column(name = "Description") private String description;
-    @Column(name = "Status") private int status;
+    @OneToOne
+    @JoinColumn(name = "UserId", referencedColumnName = "Id") User user;
     @Column(name = "CreatedBy") private String createdBy;
     @Column(name = "CreatedDate") private LocalDateTime createdAt;
     @Column(name = "LastModifiedBy") private String modifiedBy;

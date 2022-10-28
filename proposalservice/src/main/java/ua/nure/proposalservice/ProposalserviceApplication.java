@@ -3,7 +3,7 @@ package ua.nure.proposalservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ua.nure.proposalservice.repos.HelpProposalRepository;
+//import ua.nure.proposalservice.repos.HelpProposalRepository;
 
 import javax.annotation.PostConstruct;
 
