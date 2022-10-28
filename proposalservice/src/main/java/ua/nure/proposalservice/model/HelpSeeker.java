@@ -13,7 +13,7 @@ public class HelpSeeker {
     @Id
     @Column(name = "Id", nullable = false, length = 450) private String id;
     @OneToOne
-    @JoinColumn(name = "UserId", referencedColumnName = "Id") User user;;
+    @JoinColumn(name = "UserId", referencedColumnName = "Id") User user;
     @Column(name = "CreatedBy") private String createdBy;
     @Column(name = "CreatedDate") private LocalDateTime createdAt;
     @Column(name = "LastModifiedBy") private String modifiedBy;
