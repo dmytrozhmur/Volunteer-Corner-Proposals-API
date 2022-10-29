@@ -13,9 +13,8 @@ import java.util.List;
 public class HelpProposal {
     @Id
     @Column(name = "Id", nullable = false, length = 450) private String id;
-    @OneToMany
-    @Column(name = "OwnerId")
-    List<Volunteer> volunteer;
+    @ManyToOne
+    @JoinColumn(name = "OwnerId", referencedColumnName = "Id") Volunteer volunteer;
     @Column(name = "Description") private String description;
     @Column(name = "Status") private int status;
     @Column(name = "CreatedBy") private String createdBy;
