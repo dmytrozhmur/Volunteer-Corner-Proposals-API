@@ -7,6 +7,7 @@ import ua.nure.proposalservice.component.mapper.ProposalInfoMapper;
 import ua.nure.proposalservice.dao.OfferRepository;
 import ua.nure.proposalservice.dto.ProposalCreation;
 import ua.nure.proposalservice.dto.ProposalInfo;
+import ua.nure.proposalservice.model.HelpProposal;
 
 import java.util.List;
 
@@ -27,7 +28,9 @@ public class OfferService {
         return infoMapper.toDtoList(offerRepository.findAll());
     }
 
-    public void addProposal(ProposalCreation creation) {
-        offerRepository.save(creationMapper.toProposal(creation));
+    public ProposalInfo addProposal(ProposalCreation creation) {
+        HelpProposal entity = creationMapper.toProposal(creation);
+        offerRepository.save(entity);
+        return infoMapper.toDto(entity);
     }
 }
