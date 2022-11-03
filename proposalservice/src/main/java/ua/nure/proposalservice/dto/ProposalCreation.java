@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class ProposalCreation {
-    private Volunteer volunteer;
+    private String volunteerId;
     private String description;
     private int status;
 }

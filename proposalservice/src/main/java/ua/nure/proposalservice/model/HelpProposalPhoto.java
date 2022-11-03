@@ -8,8 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity
-@Table(schema = "dbo", name = "HelpProposalsPhotos")
+@Entity(name = "HelpProposalsPhotos")
 public class HelpProposalPhoto {
     @Id
     @Column(name = "Id", nullable = false, length = 450) private String id;
