@@ -3,6 +3,7 @@ package ua.nure.proposalservice.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -41,10 +42,11 @@ public class SecurityConfiguration {
                 .cors().and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/**").permitAll().and()
+                .antMatchers("/api/v1/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/v1/proposal").hasRole("VOLUNTEER").and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler).and()
                 .logout().permitAll();
-       // http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

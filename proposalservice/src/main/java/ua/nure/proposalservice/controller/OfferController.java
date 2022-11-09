@@ -47,7 +47,6 @@ public class OfferController {
             @ApiResponse(responseCode = "403", description = "Access denied",
                     content = @Content(mediaType = "application/json"))
     })
-    @PreAuthorize("hasRole('ADMIN') or hasRole('VOLUNTEER')")
     private ProposalInfo newProposal(@RequestBody ProposalCreation newProposal) {
         return offerService.addProposal(newProposal);
     }

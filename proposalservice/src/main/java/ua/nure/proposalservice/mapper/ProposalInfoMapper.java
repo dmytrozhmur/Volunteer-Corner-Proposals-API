@@ -10,6 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ProposalInfoMapper {
     @Mapping(source = "proposal.owner.id", target = "ownerId")
+    @Mapping(target = "createdAt", expression = "java(proposal.getCreatedAt().toString())")
     ProposalInfo toDto(HelpProposal proposal);
 
     List<ProposalInfo> toDtoList(List<HelpProposal> proposals);
