@@ -1,23 +1,19 @@
 package ua.nure.proposalservice;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//import ua.nure.proposalservice.repos.HelpProposalRepository;
+import org.springframework.context.annotation.Bean;
 
-import javax.annotation.PostConstruct;
 
 @SpringBootApplication
 public class ProposalserviceApplication {
-//    @Autowired
-//    private HelpProposalRepository repository;
+    @Bean
+    public ObjectMapper mapper() {
+        return new ObjectMapper();
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(ProposalserviceApplication.class, args);
     }
-
-//    @PostConstruct
-//    public void checkRepository() {
-//        System.out.println(repository.findAll());
-//    }
 }
