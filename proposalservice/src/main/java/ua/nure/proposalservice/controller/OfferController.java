@@ -42,6 +42,8 @@ public class OfferController {
             @ApiResponse(responseCode = "201", description = "Proposal created",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProposalInfo.class))),
+            @ApiResponse(responseCode = "400", description = "Body not specified",
+                    content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "401", description = "Unknown sender",
                     content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "403", description = "Access denied",
