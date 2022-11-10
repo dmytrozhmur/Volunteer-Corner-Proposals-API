@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 public class OfferController {
-    OfferService offerService;
+    private OfferService offerService;
 
     public OfferController(@Autowired OfferService offerService) {
         this.offerService = offerService;
