@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Data
 public class ProposalInfo {
     private String id;
+    private String name;
     private String ownerId;
     private String description;
     private int status;

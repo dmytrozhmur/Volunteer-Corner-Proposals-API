@@ -13,12 +13,12 @@ import java.util.Set;
 public class User {
     @Id
     @Column(name = "Id", nullable = false, length = 450) private String id;
-//    @ManyToMany
-//    @JoinTable(
-//            inverseJoinColumns = @JoinColumn(name = "RoleId"),
-//            joinColumns = @JoinColumn(name = "UserId"),
-//            name = "AspNetUserRoles")
-   // private Set<Role> roles;
+    @ManyToMany
+    @JoinTable(
+            name = "AspNetUserRoles",
+            joinColumns = @JoinColumn(name = "UserId"),
+            inverseJoinColumns = @JoinColumn(name = "RoleId"))
+    private Set<Role> roles;
     @Column(name = "FirstName") private String firstName;
     @Column(name = "LastName") private String lastName;
     @Column(name = "Patronymic") private String patronymic;
