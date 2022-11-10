@@ -35,7 +35,7 @@ public class OfferController {
         return offerService.getAllProposals();
     }
 
-    @PostMapping("/api/v1/proposal")
+    @PostMapping("/api/v1/proposals/create")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create new proposal")
     @ApiResponses({
@@ -51,7 +51,7 @@ public class OfferController {
         return offerService.addProposal(newProposal);
     }
 
-    @GetMapping("/api/v1/proposal/{id}")
+    @GetMapping("/api/v1/proposals/{id}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Get proposal by id")
     @ApiResponses({

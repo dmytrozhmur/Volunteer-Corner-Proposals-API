@@ -42,8 +42,8 @@ public class SecurityConfiguration {
                 .cors().and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/v1/proposal").hasRole("VOLUNTEER").and()
+                .antMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/v1/**").hasRole("VOLUNTEER").and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler).and()
                 .logout().permitAll();
         http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);

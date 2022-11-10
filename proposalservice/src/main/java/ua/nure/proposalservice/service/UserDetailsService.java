@@ -21,10 +21,9 @@ public class UserDetailsService {
         return new UserDetails() {
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
-                return null;
-//                        user.getRoles().stream()
-//                        .map(role -> new SimpleGrantedAuthority(""))
-//                        .toList();
+                return user.getRoles().stream()
+                        .map(role -> new SimpleGrantedAuthority("ROLE_".concat(role.getNormalizedName())))
+                        .toList();
             }
 
             @Override

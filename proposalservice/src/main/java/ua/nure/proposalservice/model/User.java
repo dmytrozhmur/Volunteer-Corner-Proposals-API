@@ -13,7 +13,7 @@ import java.util.Set;
 public class User {
     @Id
     @Column(name = "Id", nullable = false, length = 450) private String id;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "AspNetUserRoles",
             joinColumns = @JoinColumn(name = "UserId"),
