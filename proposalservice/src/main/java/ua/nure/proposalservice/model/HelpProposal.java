@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -14,6 +15,7 @@ public class HelpProposal {
     @Column(name = "Id", nullable = false, length = 450) private String id;
     @ManyToOne
     @JoinColumn(name = "OwnerId", referencedColumnName = "Id") Volunteer owner;
+    @Column(name = "Name") private String name;
     @Column(name = "Description") private String description;
     @Column(name = "Status") private int status;
     @Column(name = "CreatedBy") private String createdBy;

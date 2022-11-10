@@ -3,10 +3,9 @@ package ua.nure.proposalservice.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -14,6 +13,12 @@ import java.util.List;
 public class User {
     @Id
     @Column(name = "Id", nullable = false, length = 450) private String id;
+    @ManyToMany
+    @JoinTable(
+            name = "AspNetUserRoles",
+            joinColumns = @JoinColumn(name = "UserId"),
+            inverseJoinColumns = @JoinColumn(name = "RoleId"))
+    private Set<Role> roles;
     @Column(name = "FirstName") private String firstName;
     @Column(name = "LastName") private String lastName;
     @Column(name = "Patronymic") private String patronymic;
