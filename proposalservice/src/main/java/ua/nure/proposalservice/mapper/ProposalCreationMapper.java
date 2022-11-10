@@ -1,4 +1,4 @@
-package ua.nure.proposalservice.component.mapper;
+package ua.nure.proposalservice.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

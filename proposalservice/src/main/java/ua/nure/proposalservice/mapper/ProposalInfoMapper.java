@@ -1,4 +1,4 @@
-package ua.nure.proposalservice.component.mapper;
+package ua.nure.proposalservice.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -10,6 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ProposalInfoMapper {
     @Mapping(source = "proposal.owner.id", target = "ownerId")
+    @Mapping(target = "createdAt", expression = "java(proposal.getCreatedAt().toString())")
     ProposalInfo toDto(HelpProposal proposal);
 
     List<ProposalInfo> toDtoList(List<HelpProposal> proposals);

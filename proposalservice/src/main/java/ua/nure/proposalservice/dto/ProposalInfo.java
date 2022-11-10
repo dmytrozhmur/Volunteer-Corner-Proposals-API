@@ -15,7 +15,7 @@ public class ProposalInfo {
     private String description;
     private int status;
     private String createdBy;
-    private LocalDateTime createdAt;
+    private String createdAt;
     private String modifiedBy;
-    private LocalDateTime modifiedAt;
+    private String modifiedAt;
 }

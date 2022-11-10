@@ -2,8 +2,8 @@ package ua.nure.proposalservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.nure.proposalservice.component.mapper.ProposalCreationMapper;
-import ua.nure.proposalservice.component.mapper.ProposalInfoMapper;
+import ua.nure.proposalservice.mapper.ProposalCreationMapper;
+import ua.nure.proposalservice.mapper.ProposalInfoMapper;
 import ua.nure.proposalservice.dao.OfferRepository;
 import ua.nure.proposalservice.dto.ProposalCreation;
 import ua.nure.proposalservice.dto.ProposalInfo;
