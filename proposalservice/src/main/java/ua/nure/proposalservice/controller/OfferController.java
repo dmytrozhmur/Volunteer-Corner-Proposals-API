@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import ua.nure.proposalservice.dto.ProposalCreation;
 import ua.nure.proposalservice.dto.ProposalInfo;
@@ -49,8 +51,8 @@ public class OfferController {
             @ApiResponse(responseCode = "403", description = "Access denied",
                     content = @Content(mediaType = "application/json"))
     })
-    private ProposalInfo newProposal(@RequestBody ProposalCreation newProposal) {
-        return offerService.addProposal(newProposal);
+    private ProposalInfo newProposal(@RequestBody ProposalCreation creation) {
+        return offerService.addProposal(creation);
     }
 
     @GetMapping("/api/v1/proposals/{id}")
