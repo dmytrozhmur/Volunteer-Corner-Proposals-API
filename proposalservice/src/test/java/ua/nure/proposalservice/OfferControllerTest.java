@@ -50,7 +50,7 @@ public class OfferControllerTest {
                 expected
         );
 
-        ProposalInfo actual = offerService.addProposal(proposalCreation);
+        ProposalInfo actual = offerController.newProposal(proposalCreation);
 
         Assert.assertEquals(expected, actual);
 }}

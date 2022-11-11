@@ -31,7 +31,7 @@ public class OfferController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProposalInfo[].class)))
     })
-    private List<ProposalInfo> allProposals() {
+    public List<ProposalInfo> allProposals() {
         return offerService.getAllProposals();
     }
 
@@ -49,7 +49,7 @@ public class OfferController {
             @ApiResponse(responseCode = "403", description = "Access denied",
                     content = @Content(mediaType = "application/json"))
     })
-    private ProposalInfo newProposal(@RequestBody ProposalCreation newProposal) {
+    public ProposalInfo newProposal(@RequestBody ProposalCreation newProposal) {
         return offerService.addProposal(newProposal);
     }
 
@@ -63,7 +63,7 @@ public class OfferController {
             @ApiResponse(responseCode = "404", description = "Proposal not found",
                     content = @Content(mediaType = "application/json"))
     })
-    private ProposalInfo oneProposal(@PathVariable String id) {
+    public ProposalInfo oneProposal(@PathVariable String id) {
         return offerService.getProposalById(id);
     }
 }
