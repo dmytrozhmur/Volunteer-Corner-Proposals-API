@@ -19,7 +19,7 @@ public abstract class ProposalCreationMapper {
     @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "owner", expression = "java(volunteerRepository.findById(creation.getVolunteerId()).get())")
     @Mapping(target = "createdBy", expression = "java(" +
-            "userRepository.findByLogin(((org.springframework.security.core.userdetails.UserDetails) org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getDetails()).getUsername()).getId()" +
+            "userRepository.findByLogin(((org.springframework.security.core.userdetails.UserDetails) org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername()).getId()" +
             ")")
     public abstract HelpProposal toProposal(ProposalCreation creation);
 }
