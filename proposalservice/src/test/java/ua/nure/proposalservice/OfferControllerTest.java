@@ -37,10 +37,7 @@ public class OfferControllerTest {
         expected.setCreatedAt("24 February 2022");
         expected.setDescription("I like NURE!");
         expected.setStatus(2000);
-        expected.setModifiedAt("25 February 2022");
-        expected.setModifiedBy("Admin");
         expected.setOwnerId("232323");
-        expected.setCreatedBy("Admin232");
 
         ProposalCreation proposalCreation = new ProposalCreation();
         proposalCreation.setDescription("I like NURE!");

@@ -22,4 +22,5 @@ public class HelpProposal {
     @Column(name = "CreatedDate") private LocalDateTime createdAt;
     @Column(name = "LastModifiedBy") private String modifiedBy;
     @Column(name = "LastModifiedDate") private LocalDateTime modifiedAt;
+    @Column(name = "Location") private String location;
 }

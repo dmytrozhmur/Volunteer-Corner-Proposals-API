@@ -11,4 +11,5 @@ public class ProposalCreation {
     private String volunteerId;
     private String description;
     private int status;
+    private String location;
 }

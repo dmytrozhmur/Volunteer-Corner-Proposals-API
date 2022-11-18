@@ -38,20 +38,16 @@ public class OfferServiceTest {
         LocalDateTime testDate = LocalDateTime.now();
         Volunteer owner = new Volunteer();
         owner.setId("34343");
-        User user = new User();
-        user.setId("56565");
         String testId = "123A";
 
         ProposalInfo expected = new ProposalInfo();
         expected.setId(testId);
         expected.setCreatedAt(testDate.toString());
-        expected.setCreatedBy(user.getId());
         expected.setOwnerId(owner.getId());
 
         HelpProposal created = new HelpProposal();
         created.setId(testId);
         created.setOwner(owner);
-        created.setCreatedBy(user.getId());
         created.setCreatedAt(testDate);
 
         ProposalCreation creation = new ProposalCreation();
