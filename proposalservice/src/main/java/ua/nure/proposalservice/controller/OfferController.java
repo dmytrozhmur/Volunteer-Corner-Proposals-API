@@ -42,7 +42,7 @@ public class OfferController {
             @ApiResponse(responseCode = "201", description = "Proposal created",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProposalInfo.class))),
-            @ApiResponse(responseCode = "400", description = "Body not specified",
+            @ApiResponse(responseCode = "400", description = "Body not properly specified",
                     content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "401", description = "Unknown sender",
                     content = @Content(mediaType = "application/json")),
@@ -69,11 +69,17 @@ public class OfferController {
 
     @PutMapping("/api/v1/proposals/{id}")
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "Get proposal by id")
+    @Operation(summary = "Update proposal by id")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Got proposal",
+            @ApiResponse(responseCode = "202", description = "Proposal edited",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProposalInfo.class))),
+            @ApiResponse(responseCode = "400", description = "Body not properly specified",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "401", description = "Unknown sender",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "403", description = "Access denied",
+                    content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "404", description = "Proposal not found",
                     content = @Content(mediaType = "application/json"))
     })
