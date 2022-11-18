@@ -43,11 +43,6 @@ public class OfferServiceTest {
         expected.setCreatedAt(testDate.toString());
         expected.setOwnerId(owner.getId());
 
-        HelpProposal created = new HelpProposal();
-        created.setId(testId);
-        created.setOwner(owner);
-        created.setCreatedAt(testDate);
-
         ProposalCreation creation = new ProposalCreation();
         creation.setOwnerId(owner.getId());
 
@@ -56,7 +51,13 @@ public class OfferServiceTest {
             doReturn(Optional.of(proposal)).when(offerRepository).findById(proposal.getId());
             return null;
         }).when(offerRepository).save(any());
-        doReturn(created).when(creationMapper).toProposal(creation);
+        doAnswer(invocation -> {
+            HelpProposal created = invocation.getArgument(1);
+            created.setId(testId);
+            created.setOwner(owner);
+            created.setCreatedAt(testDate);
+            return null;
+        }).when(creationMapper).toProposal(creation, new HelpProposal());
 
         offerService.addProposal(creation);
         ProposalInfo actual = offerService.getProposalById(testId);
