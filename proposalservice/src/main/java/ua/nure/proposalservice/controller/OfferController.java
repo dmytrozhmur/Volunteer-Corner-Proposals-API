@@ -66,4 +66,19 @@ public class OfferController {
     public ProposalInfo oneProposal(@PathVariable String id) {
         return offerService.getProposalById(id);
     }
+
+    @PutMapping("/api/v1/proposals/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Get proposal by id")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Got proposal",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProposalInfo.class))),
+            @ApiResponse(responseCode = "404", description = "Proposal not found",
+                    content = @Content(mediaType = "application/json"))
+    })
+    public ProposalInfo editProposal(@PathVariable String id,
+                                     @RequestBody ProposalCreation editedProposal) {
+        return offerService.updateProposalById(id, editedProposal);
+    }
 }

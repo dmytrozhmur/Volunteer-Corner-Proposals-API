@@ -38,12 +38,15 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+                .and()
                 .cors().and().csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/v1/**").hasRole("VOLUNTEER").and()
+                //.antMatchers(HttpMethod.POST, "/api/v1/**").hasRole("VOLUNTEER")
+                .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler).and()
                 .logout().permitAll();
         http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
