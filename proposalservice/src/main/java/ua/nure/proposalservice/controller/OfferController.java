@@ -68,7 +68,7 @@ public class OfferController {
     }
 
     @PutMapping("/api/v1/proposals/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @Operation(summary = "Update proposal by id")
     @ApiResponses({
             @ApiResponse(responseCode = "202", description = "Proposal edited",
