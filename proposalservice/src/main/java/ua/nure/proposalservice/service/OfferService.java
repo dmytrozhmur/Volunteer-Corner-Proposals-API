@@ -29,7 +29,15 @@ public class OfferService {
     }
 
     public ProposalInfo addProposal(ProposalCreation creation) {
-        HelpProposal entity = creationMapper.toProposal(creation);
+        HelpProposal entity = new HelpProposal();
+        creationMapper.toProposal(creation, entity);
+        offerRepository.save(entity);
+        return infoMapper.toDto(entity);
+    }
+
+    public ProposalInfo updateProposalById(String id, ProposalCreation editedProposal) {
+        HelpProposal entity = offerRepository.findById(id).orElseThrow();
+        creationMapper.toProposal(editedProposal, entity);
         offerRepository.save(entity);
         return infoMapper.toDto(entity);
     }

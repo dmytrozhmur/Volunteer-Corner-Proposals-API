@@ -1,9 +1,6 @@
 package ua.nure.proposalservice.mapper;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.NullValueMappingStrategy;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.nure.proposalservice.dao.UserRepository;
 import ua.nure.proposalservice.dao.VolunteerRepository;
@@ -17,12 +14,13 @@ public abstract class ProposalCreationMapper {
     @Autowired
     protected UserRepository userRepository;
 
-    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID().toString())")
+    @Mapping(target = "entity.id",
+            expression = "java(entity.getId() == null ? java.util.UUID.randomUUID().toString() : entity.getId())")
     @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now())")
-    @Mapping(target = "owner", expression = "java(volunteerRepository.findById(creation.getVolunteerId()).get())")
-    @Mapping(target = "createdBy", expression = "java(" +
-            "userRepository.findByLogin(((org.springframework.security.core.userdetails.UserDetails) " +
-            "org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername())" +
-            ".getId())")
-    public abstract HelpProposal toProposal(ProposalCreation creation);
+    @Mapping(target = "owner", expression = "java(volunteerRepository.findById(creation.getOwnerId()).get())")
+//    @Mapping(target = "createdBy", expression = "java(" +
+//            "userRepository.findByLogin(((org.springframework.security.core.userdetails.UserDetails) " +
+//            "org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername())" +
+//            ".getId())")
+    public abstract void toProposal(ProposalCreation creation, @MappingTarget HelpProposal entity);
 }

@@ -1,12 +1,8 @@
 package ua.nure.proposalservice;
 
-import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -18,7 +14,6 @@ import ua.nure.proposalservice.service.OfferService;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -42,7 +37,7 @@ public class OfferControllerTest {
         ProposalCreation proposalCreation = new ProposalCreation();
         proposalCreation.setDescription("I like NURE!");
         proposalCreation.setName("Vin");
-        proposalCreation.setVolunteerId("34343");
+        proposalCreation.setOwnerId("34343");
         proposalCreation.setStatus(2000);
 
         when(offerService.addProposal(proposalCreation)).thenReturn(expected);
