@@ -15,5 +15,6 @@ public class ProposalInfo {
     private String description;
     private int status;
     private String createdAt;
+    private String modifiedAt;
     private String location;
 }
