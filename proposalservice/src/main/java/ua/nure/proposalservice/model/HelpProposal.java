@@ -25,6 +25,12 @@ public class HelpProposal {
     @Column(name = "LastModifiedDate") private LocalDateTime modifiedAt;
     @Column(name = "Location") private String location;
 
+    protected HelpProposal() {}
+
+    public static HelpProposal empty() {
+        return new HelpProposal();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

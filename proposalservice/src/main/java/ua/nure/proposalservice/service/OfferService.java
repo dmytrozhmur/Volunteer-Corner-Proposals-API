@@ -1,6 +1,7 @@
 package ua.nure.proposalservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import ua.nure.proposalservice.mapper.ProposalCreationMapper;
 import ua.nure.proposalservice.mapper.ProposalInfoMapper;
@@ -29,14 +30,17 @@ public class OfferService {
     }
 
     public ProposalInfo addProposal(ProposalCreation creation) {
-        HelpProposal entity = new HelpProposal();
-        creationMapper.toProposal(creation, entity);
-        offerRepository.save(entity);
-        return infoMapper.toDto(entity);
+        HelpProposal entity = HelpProposal.empty();
+        return saveProposalAndGetDto(creation, entity);
     }
 
     public ProposalInfo updateProposalById(String id, ProposalCreation editedProposal) {
         HelpProposal entity = offerRepository.findById(id).orElseThrow();
+        return saveProposalAndGetDto(editedProposal, entity);
+    }
+
+    @PreAuthorize("hasRole('ROLE_SUPERADMIN') or #entity.id == null or #entity.owner.user.login == authentication.principal.username")
+    private ProposalInfo saveProposalAndGetDto(ProposalCreation editedProposal, HelpProposal entity) {
         creationMapper.toProposal(editedProposal, entity);
         offerRepository.save(entity);
         return infoMapper.toDto(entity);
