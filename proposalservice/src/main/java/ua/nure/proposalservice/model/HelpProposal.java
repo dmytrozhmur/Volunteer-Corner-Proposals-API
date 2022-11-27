@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -22,4 +23,18 @@ public class HelpProposal {
     @Column(name = "CreatedDate") private LocalDateTime createdAt;
     @Column(name = "LastModifiedBy") private String modifiedBy;
     @Column(name = "LastModifiedDate") private LocalDateTime modifiedAt;
+    @Column(name = "Location") private String location;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HelpProposal proposal = (HelpProposal) o;
+        return status == proposal.status && Objects.equals(id, proposal.id) && Objects.equals(owner, proposal.owner) && Objects.equals(name, proposal.name) && Objects.equals(description, proposal.description) && Objects.equals(location, proposal.location);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

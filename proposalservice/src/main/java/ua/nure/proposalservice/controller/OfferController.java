@@ -8,8 +8,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import ua.nure.proposalservice.dto.ProposalCreation;
 import ua.nure.proposalservice.dto.ProposalInfo;
@@ -33,7 +31,7 @@ public class OfferController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProposalInfo[].class)))
     })
-    private List<ProposalInfo> allProposals() {
+    public List<ProposalInfo> allProposals() {
         return offerService.getAllProposals();
     }
 
@@ -44,15 +42,15 @@ public class OfferController {
             @ApiResponse(responseCode = "201", description = "Proposal created",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProposalInfo.class))),
-            @ApiResponse(responseCode = "400", description = "Body not specified",
+            @ApiResponse(responseCode = "400", description = "Body not properly specified",
                     content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "401", description = "Unknown sender",
                     content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "403", description = "Access denied",
                     content = @Content(mediaType = "application/json"))
     })
-    private ProposalInfo newProposal(@RequestBody ProposalCreation creation) {
-        return offerService.addProposal(creation);
+    public ProposalInfo newProposal(@RequestBody ProposalCreation newProposal) {
+        return offerService.addProposal(newProposal);
     }
 
     @GetMapping("/api/v1/proposals/{id}")
@@ -65,7 +63,28 @@ public class OfferController {
             @ApiResponse(responseCode = "404", description = "Proposal not found",
                     content = @Content(mediaType = "application/json"))
     })
-    private ProposalInfo oneProposal(@PathVariable String id) {
+    public ProposalInfo oneProposal(@PathVariable String id) {
         return offerService.getProposalById(id);
+    }
+
+    @PutMapping("/api/v1/proposals/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @Operation(summary = "Update proposal by id")
+    @ApiResponses({
+            @ApiResponse(responseCode = "202", description = "Proposal edited",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProposalInfo.class))),
+            @ApiResponse(responseCode = "400", description = "Body not properly specified",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "401", description = "Unknown sender",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "403", description = "Access denied",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "404", description = "Proposal not found",
+                    content = @Content(mediaType = "application/json"))
+    })
+    public ProposalInfo editProposal(@PathVariable String id,
+                                     @RequestBody ProposalCreation editedProposal) {
+        return offerService.updateProposalById(id, editedProposal);
     }
 }
