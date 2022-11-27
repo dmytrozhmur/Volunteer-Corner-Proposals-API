@@ -1,4 +1,4 @@
-package ua.nure.proposalservice.controller;
+package ua.nure.proposalservice.exception;
 
 import org.springframework.http.HttpStatus;
 
