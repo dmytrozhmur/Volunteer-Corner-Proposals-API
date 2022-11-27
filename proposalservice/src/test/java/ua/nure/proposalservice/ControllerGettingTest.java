@@ -8,20 +8,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import ua.nure.proposalservice.controller.OfferController;
-import ua.nure.proposalservice.dao.OfferRepository;
 import ua.nure.proposalservice.dto.ProposalInfo;
-import ua.nure.proposalservice.model.HelpProposal;
-import ua.nure.proposalservice.model.User;
 import ua.nure.proposalservice.model.Volunteer;
 import ua.nure.proposalservice.service.OfferService;
 
@@ -37,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-public class GettingTest {
+public class ControllerGettingTest {
 
     private MockMvc mockMvc;
 
