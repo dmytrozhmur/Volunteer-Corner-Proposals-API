@@ -39,6 +39,12 @@ public class OfferService {
         return saveProposalAndGetDto(editedProposal, entity);
     }
 
+    public void updateProposalStatusById(String id, int status) {
+        HelpProposal entity = offerRepository.findById(id).orElseThrow();
+        entity.setStatus(status);
+        offerRepository.save(entity);
+    }
+
     @PreAuthorize("hasRole('ROLE_SUPERADMIN') or #entity.id == null or #entity.owner.user.login == authentication.principal.username")
     private ProposalInfo saveProposalAndGetDto(ProposalCreation editedProposal, HelpProposal entity) {
         creationMapper.toProposal(editedProposal, entity);

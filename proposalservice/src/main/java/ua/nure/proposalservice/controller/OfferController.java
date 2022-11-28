@@ -87,4 +87,44 @@ public class OfferController {
                                      @RequestBody ProposalCreation editedProposal) {
         return offerService.updateProposalById(id, editedProposal);
     }
+
+    @PostMapping("/api/v1/proposals/{id}/close")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @Operation(summary = "Set proposal status to 3000 by id")
+    @ApiResponses({
+            @ApiResponse(responseCode = "202", description = "Proposal status edited",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProposalInfo.class))),
+            @ApiResponse(responseCode = "400", description = "Body not properly specified",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "401", description = "Unknown sender",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "403", description = "Access denied",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "404", description = "Proposal not found",
+                    content = @Content(mediaType = "application/json"))
+    })
+    public void completeProposal(@PathVariable String id) {
+        offerService.updateProposalStatusById(id, 3000);
+    }
+
+    @PostMapping("/api/v1/proposals/{id}/cancel")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @Operation(summary = "Set proposal status to 2000 by id")
+    @ApiResponses({
+            @ApiResponse(responseCode = "202", description = "Proposal status edited",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProposalInfo.class))),
+            @ApiResponse(responseCode = "400", description = "Body not properly specified",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "401", description = "Unknown sender",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "403", description = "Access denied",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "404", description = "Proposal not found",
+                    content = @Content(mediaType = "application/json"))
+    })
+    public void cancelProposal(@PathVariable String id) {
+        offerService.updateProposalStatusById(id, 2000);
+    }
 }

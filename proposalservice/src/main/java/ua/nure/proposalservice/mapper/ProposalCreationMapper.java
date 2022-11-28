@@ -36,7 +36,6 @@ public abstract class ProposalCreationMapper {
 
         entity.setName( creation.getName() );
         entity.setDescription( creation.getDescription() );
-        entity.setStatus( creation.getStatus() );
         entity.setLocation( creation.getLocation() );
         entity.setOwner( volunteerRepository.findById(creation.getOwnerId()).orElseThrow() );
 
@@ -44,6 +43,7 @@ public abstract class ProposalCreationMapper {
             entity.setId(UUID.randomUUID().toString());
             entity.setCreatedAt(actionTime);
             entity.setCreatedBy(actor.getId());
+            entity.setStatus(1000);
         } else {
             entity.setModifiedAt(actionTime);
             entity.setModifiedBy(actor.getId());
