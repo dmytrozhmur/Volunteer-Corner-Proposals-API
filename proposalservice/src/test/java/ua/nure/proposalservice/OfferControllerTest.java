@@ -38,7 +38,6 @@ public class OfferControllerTest {
         proposalCreation.setDescription("I like NURE!");
         proposalCreation.setName("Vin");
         proposalCreation.setOwnerId("34343");
-        proposalCreation.setStatus(2000);
 
         when(offerService.addProposal(proposalCreation)).thenReturn(expected);
 
