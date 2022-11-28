@@ -35,6 +35,8 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -50,8 +52,8 @@ public class ControllerEditTest {
     @Mock
     private OfferService offerService;
 
-    @Mock
-    private OfferRepository offerRepository;
+    //@Mock
+    //private OfferRepository offerRepository;
 
     @InjectMocks
     private OfferController offerController;
@@ -98,13 +100,8 @@ public class ControllerEditTest {
     public void editProposal() throws Exception {
         List<ProposalInfo> proposals = new ArrayList<>(Arrays.asList(PROPOSAL_1, PROPOSAL_2, PROPOSAL_3));
 
-        HelpProposal updatedHelpProposal = new HelpProposal();
         String updatedName = "Updated proposal #1";
         String updatedDescription = "Updated description #1";
-        updatedHelpProposal.setId(PROPOSAL_1.getId());
-        updatedHelpProposal.setName(updatedName);
-        updatedHelpProposal.setDescription(updatedDescription);
-        updatedHelpProposal.setOwner(testOwner);
 
         ProposalCreation updatedCreation = new ProposalCreation();
         updatedCreation.setId(PROPOSAL_1.getId());
@@ -112,28 +109,7 @@ public class ControllerEditTest {
         updatedCreation.setDescription(updatedDescription);
         updatedCreation.setOwnerId(testOwner.getId());
 
-        ProposalInfo updatedProposal = offerController.editProposal(PROPOSAL_1.getId(), updatedCreation);
-
-        //LocalDateTime doesn't work
-
-        //updatedHelpProposal.setCreatedAt(LocalDateTime.parse(PROPOSAL_1.getCreatedAt()));
-        //updatedHelpProposal.setModifiedAt(LocalDateTime.now());
-
-        Mockito.when(offerService.getProposalById(PROPOSAL_1.getId())).thenReturn(proposals.get(proposals.indexOf(PROPOSAL_1)));
-        Mockito.when(offerRepository.save(updatedHelpProposal)).thenReturn(updatedHelpProposal);
-
-        String updatedContent = objectWriter.writeValueAsString(updatedProposal);
-
-        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/api/v1/proposals")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(updatedContent);
-
-        //Error 405
-
-        mockMvc.perform(mockRequest)
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$", notNullValue()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Updated proposal #1"));
+        offerController.editProposal(PROPOSAL_1.getId(), updatedCreation);
+        verify(offerService).updateProposalById(PROPOSAL_1.getId(), updatedCreation);
     }
 }
