@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import ua.nure.proposalservice.controller.OfferController;
 import ua.nure.proposalservice.dao.OfferRepository;
+import ua.nure.proposalservice.dto.ProposalCreation;
 import ua.nure.proposalservice.dto.ProposalInfo;
 import ua.nure.proposalservice.model.HelpProposal;
 import ua.nure.proposalservice.model.Volunteer;
@@ -97,21 +98,29 @@ public class ControllerEditTest {
     public void editProposal() throws Exception {
         List<ProposalInfo> proposals = new ArrayList<>(Arrays.asList(PROPOSAL_1, PROPOSAL_2, PROPOSAL_3));
 
-        HelpProposal updatedProposal = new HelpProposal();
+        HelpProposal updatedHelpProposal = new HelpProposal();
         String updatedName = "Updated proposal #1";
         String updatedDescription = "Updated description #1";
-        updatedProposal.setId(PROPOSAL_1.getId());
-        updatedProposal.setName(updatedName);
-        updatedProposal.setDescription(updatedDescription);
-        updatedProposal.setOwner(testOwner);
+        updatedHelpProposal.setId(PROPOSAL_1.getId());
+        updatedHelpProposal.setName(updatedName);
+        updatedHelpProposal.setDescription(updatedDescription);
+        updatedHelpProposal.setOwner(testOwner);
+
+        ProposalCreation updatedCreation = new ProposalCreation();
+        updatedCreation.setId(PROPOSAL_1.getId());
+        updatedCreation.setName(updatedName);
+        updatedCreation.setDescription(updatedDescription);
+        updatedCreation.setOwnerId(testOwner.getId());
+
+        ProposalInfo updatedProposal = offerController.editProposal(PROPOSAL_1.getId(), updatedCreation);
 
         //LocalDateTime doesn't work
 
-        //updatedProposal.setCreatedAt(LocalDateTime.parse(PROPOSAL_1.getCreatedAt()));
-        //updatedProposal.setModifiedAt(LocalDateTime.now());
+        //updatedHelpProposal.setCreatedAt(LocalDateTime.parse(PROPOSAL_1.getCreatedAt()));
+        //updatedHelpProposal.setModifiedAt(LocalDateTime.now());
 
         Mockito.when(offerService.getProposalById(PROPOSAL_1.getId())).thenReturn(proposals.get(proposals.indexOf(PROPOSAL_1)));
-        Mockito.when(offerRepository.save(updatedProposal)).thenReturn(updatedProposal);
+        Mockito.when(offerRepository.save(updatedHelpProposal)).thenReturn(updatedHelpProposal);
 
         String updatedContent = objectWriter.writeValueAsString(updatedProposal);
 
