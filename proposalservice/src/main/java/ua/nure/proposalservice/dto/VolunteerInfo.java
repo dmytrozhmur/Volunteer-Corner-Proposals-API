@@ -9,4 +9,5 @@ public class VolunteerInfo {
     private UserInfo user;
     private String createdAt;
     private String modifiedAt;
+    private String approved;
 }
