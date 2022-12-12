@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.nure.proposalservice.dao.VolunteerRepository;
 import ua.nure.proposalservice.dto.VolunteerInfo;
+import ua.nure.proposalservice.exception.ApiRequestException;
 import ua.nure.proposalservice.mapper.VolunteerInfoMapper;
 
 import java.util.List;
@@ -20,5 +21,10 @@ public class VolunteerService {
         return volunteerRepository.findAll().stream()
                 .map(infoMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    public VolunteerInfo getVolunteerById(String id) {
+        return volunteerRepository.findById(id).map(infoMapper::toDto)
+                .orElseThrow(() -> new ApiRequestException("Volunteer not found"));
     }
 }
