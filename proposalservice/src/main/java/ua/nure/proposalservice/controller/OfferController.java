@@ -134,7 +134,9 @@ public class OfferController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Got list of current user's proposals",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProposalInfo[].class)))
+                            schema = @Schema(implementation = ProposalInfo[].class))),
+            @ApiResponse(responseCode = "401", description = "Unknown sender",
+                    content = @Content(mediaType = "application/json"))
     })
     public List<ProposalInfo> myProposals() {
         return offerService.getCurrProposals();
