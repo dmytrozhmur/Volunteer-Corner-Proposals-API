@@ -127,4 +127,16 @@ public class OfferController {
     public void cancelProposal(@PathVariable String id) {
         offerService.updateProposalStatusById(id, 2000);
     }
+
+    @GetMapping("/api/v1/proposals/current")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Get my proposals")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Got list of current user's proposals",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProposalInfo[].class)))
+    })
+    public List<ProposalInfo> myProposals() {
+        return offerService.getCurrProposals();
+    }
 }
