@@ -35,15 +35,15 @@ public class ServiceGettingTest {
     @BeforeEach
     public void mockProposals() {
 
-        HelpProposal proposal_1 = new HelpProposal();
+        HelpProposal proposal_1 = HelpProposal.empty();
         proposal_1.setId("54523");
         proposal_1.setCreatedAt(LocalDateTime.now());
 
-        HelpProposal proposal_2 = new HelpProposal();
+        HelpProposal proposal_2 = HelpProposal.empty();
         proposal_2.setId("75412");
         proposal_2.setCreatedAt(LocalDateTime.now());
 
-        HelpProposal proposal_3 = new HelpProposal();
+        HelpProposal proposal_3 = HelpProposal.empty();
         proposal_3.setId("75235");
         proposal_3.setCreatedAt(LocalDateTime.now());
 

@@ -57,7 +57,7 @@ public class OfferServiceTest {
             created.setOwner(owner);
             created.setCreatedAt(testDate);
             return null;
-        }).when(creationMapper).toProposal(creation, HelpProposal.empty());
+        }).when(creationMapper).toEntity(creation, HelpProposal.empty());
 
         offerService.addProposal(creation);
         ProposalInfo actual = offerService.getProposalById(testId);
