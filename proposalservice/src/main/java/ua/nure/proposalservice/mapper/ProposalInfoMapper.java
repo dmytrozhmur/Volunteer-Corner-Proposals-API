@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public abstract class ProposalInfoMapper {
     @Autowired
-    private VolunteerInfoMapper volunteerMapper;
+    protected VolunteerInfoMapper volunteerMapper;
 
     @Mapping(target = "owner", expression = "java(volunteerMapper.toDto(proposal.getOwner()))")
     @Mapping(target = "createdAt", expression = "java(proposal.getCreatedAt().toString())")
