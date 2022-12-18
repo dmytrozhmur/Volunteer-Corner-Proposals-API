@@ -9,11 +9,6 @@ import java.io.IOException;
 
 @Component
 public class CrossOriginRequestFilter implements Filter {
-
-    //Configurable origin for CORS - default: * (all)
-    @Value("${app.http.filter.cors.origin:*}")
-    private String originList;
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }

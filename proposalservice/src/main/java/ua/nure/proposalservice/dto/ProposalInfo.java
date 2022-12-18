@@ -6,7 +6,7 @@ import lombok.Data;
 public class ProposalInfo {
     private String id;
     private String name;
-    private String ownerId;
+    private VolunteerInfo owner;
     private String description;
     private int status;
     private String createdAt;
