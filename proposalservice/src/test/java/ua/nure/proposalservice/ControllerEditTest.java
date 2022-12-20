@@ -35,8 +35,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -93,7 +92,6 @@ public class ControllerEditTest {
     public void setUp() {
         setAllData();
         MockitoAnnotations.initMocks(this);
-        this.mockMvc = MockMvcBuilders.standaloneSetup(offerController).build();
     }
 
     @Test
@@ -104,7 +102,6 @@ public class ControllerEditTest {
         String updatedDescription = "Updated description #1";
 
         ProposalCreation updatedCreation = new ProposalCreation();
-        updatedCreation.setId(PROPOSAL_1.getId());
         updatedCreation.setName(updatedName);
         updatedCreation.setDescription(updatedDescription);
         updatedCreation.setOwnerId(testOwner.getId());
