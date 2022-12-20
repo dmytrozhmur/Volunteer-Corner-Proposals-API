@@ -1,4 +1,4 @@
-package ua.nure.proposalservice.security;
+package ua.nure.proposalservice.component.filter;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

@@ -12,7 +12,10 @@ import java.util.List;
 public abstract class ProposalInfoMapper {
     @Autowired
     protected VolunteerInfoMapper volunteerMapper;
+    @Autowired
+    protected PhotoInfoMapper photoMapper;
 
+    @Mapping(target = "photos", expression = "java(photoMapper.toDtoList(proposal.getPhotos()))")
     @Mapping(target = "owner", expression = "java(volunteerMapper.toDto(proposal.getOwner()))")
     @Mapping(target = "createdAt", expression = "java(proposal.getCreatedAt().toString())")
     public abstract ProposalInfo toDto(HelpProposal proposal);

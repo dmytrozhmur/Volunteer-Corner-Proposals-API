@@ -1,4 +1,4 @@
-package ua.nure.proposalservice.security;
+package ua.nure.proposalservice.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ua.nure.proposalservice.component.filter.AuthTokenFilter;
 import ua.nure.proposalservice.component.handler.MissedAuthenticationPoint;
 import ua.nure.proposalservice.component.handler.UnsuitableRoleHandler;
 
@@ -43,7 +44,7 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/v1/proposals/**").hasAnyRole("VOLUNTEER", "SUPERADMIN")
+                //.antMatchers(HttpMethod.POST, "/api/v1/proposals/**").hasAnyRole("VOLUNTEER", "SUPERADMIN")
                 .antMatchers(HttpMethod.POST, "/api/v1/volunteers/**").hasAnyRole("ADMIN", "SUPERADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/v1/**").hasAnyRole("VOLUNTEER", "SUPERADMIN")
                 .and()
