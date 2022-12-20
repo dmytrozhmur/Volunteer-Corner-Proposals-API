@@ -45,7 +45,11 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/v1/**").hasAnyRole("VOLUNTEER", "SUPERADMIN")
+                .antMatchers(HttpMethod.POST, "/api/v1/proposals/**/reply").hasAnyRole("HELPSEEKER", "SUPERADMIN")
+                .antMatchers(HttpMethod.POST, "/api/v1/proposals/**/create",
+                        "/api/v1/proposals/**/complete",
+                        "/api/v1/proposals/**/close",
+                        "/api/v1/proposals/**/reactivate").hasAnyRole("VOLUNTEER", "SUPERADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/v1/**").hasAnyRole("VOLUNTEER", "SUPERADMIN")
                 .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler).and()

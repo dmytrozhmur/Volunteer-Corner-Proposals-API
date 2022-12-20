@@ -20,7 +20,7 @@ public abstract class ProposalCreationMapper {
     @Autowired
     protected UserRepository userRepository;
 
-    public void toProposal(ProposalCreation creation, HelpProposal entity) {
+    public void toEntity(ProposalCreation creation, HelpProposal entity) {
         if (creation == null) {
             return;
         }

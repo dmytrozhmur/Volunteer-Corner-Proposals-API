@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ua.nure.proposalservice.dto.ProposalCreation;
 import ua.nure.proposalservice.dto.ProposalInfo;
+import ua.nure.proposalservice.dto.ProposalResponseCreation;
 import ua.nure.proposalservice.service.OfferService;
 
 import java.util.List;
@@ -95,8 +96,6 @@ public class OfferController {
             @ApiResponse(responseCode = "202", description = "Proposal status edited",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProposalInfo.class))),
-            @ApiResponse(responseCode = "400", description = "Body not properly specified",
-                    content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "401", description = "Unknown sender",
                     content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "403", description = "Access denied",
@@ -115,8 +114,6 @@ public class OfferController {
             @ApiResponse(responseCode = "202", description = "Proposal status edited",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProposalInfo.class))),
-            @ApiResponse(responseCode = "400", description = "Body not properly specified",
-                    content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "401", description = "Unknown sender",
                     content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "403", description = "Access denied",
@@ -126,6 +123,45 @@ public class OfferController {
     })
     public void cancelProposal(@PathVariable String id) {
         offerService.updateProposalStatusById(id, 2000);
+    }
+
+    @PostMapping("/api/v1/proposals/{id}/reactivate")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @Operation(summary = "Set proposal status to 1000 by id")
+    @ApiResponses({
+            @ApiResponse(responseCode = "202", description = "Proposal status edited",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProposalInfo.class))),
+            @ApiResponse(responseCode = "401", description = "Unknown sender",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "403", description = "Access denied",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "404", description = "Proposal not found",
+                    content = @Content(mediaType = "application/json"))
+    })
+    public void restartProposal(@PathVariable String id) {
+        offerService.updateProposalStatusById(id, 1000);
+    }
+
+    @PostMapping("/api/v1/proposals/{id}/reply")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @Operation(summary = "Set proposal status to 2000 by id")
+    @ApiResponses({
+            @ApiResponse(responseCode = "202", description = "Proposal status edited",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProposalInfo.class))),
+            @ApiResponse(responseCode = "400", description = "Body not properly specified",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "401", description = "Unknown sender",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "403", description = "Access denied",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "404", description = "Proposal not found",
+                    content = @Content(mediaType = "application/json"))
+    })
+    public void respondToProposal(@PathVariable String id,
+                                  @RequestBody ProposalResponseCreation creation) {
+        offerService.addResponse(id, creation);
     }
 
     @GetMapping("/api/v1/proposals/current")
