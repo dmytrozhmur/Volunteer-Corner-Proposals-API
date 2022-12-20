@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,7 +16,8 @@ public class HelpProposal {
     @Id
     @Column(name = "Id", nullable = false, length = 450) private String id;
     @ManyToOne
-    @JoinColumn(name = "OwnerId", referencedColumnName = "Id") Volunteer owner;
+    @JoinColumn(name = "OwnerId", referencedColumnName = "Id") private Volunteer owner;
+    @OneToMany(mappedBy = "helpProposal") private List<HelpProposalPhoto> photos;
     @Column(name = "Name") private String name;
     @Column(name = "Description") private String description;
     @Column(name = "Status") private int status;

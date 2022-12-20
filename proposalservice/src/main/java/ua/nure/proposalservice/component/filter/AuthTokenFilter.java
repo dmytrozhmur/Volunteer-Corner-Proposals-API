@@ -1,4 +1,4 @@
-package ua.nure.proposalservice.security;
+package ua.nure.proposalservice.component.filter;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;

@@ -5,6 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import ua.nure.proposalservice.exception.ApiRequestException;
 import ua.nure.proposalservice.dao.HelpProposalResponseRepository;
 import ua.nure.proposalservice.dto.ProposalResponseCreation;
 import ua.nure.proposalservice.exception.ApiException;
@@ -26,6 +27,7 @@ import java.util.List;
 
 @Service
 public class OfferService {
+    private static final String NOT_FOUND = "Proposal not found";
     @Autowired
     private OfferRepository offerRepository;
     @Autowired
@@ -40,7 +42,8 @@ public class OfferService {
     private ProposalResponseCreationMapper responseCreationMapper;
 
     public ProposalInfo getProposalById(String id) {
-        return infoMapper.toDto(offerRepository.findById(id).orElseThrow());
+        return infoMapper.toDto(offerRepository.findById(id)
+                .orElseThrow(() -> new ApiRequestException(NOT_FOUND)));
     }
 
     public List<ProposalInfo> getAllProposals() {
@@ -53,12 +56,14 @@ public class OfferService {
     }
 
     public ProposalInfo updateProposalById(String id, ProposalCreation editedProposal) {
-        HelpProposal entity = offerRepository.findById(id).orElseThrow();
+        HelpProposal entity = offerRepository.findById(id)
+                .orElseThrow(() -> new ApiRequestException(NOT_FOUND));
         return saveProposalAndGetDto(editedProposal, entity);
     }
 
     public void updateProposalStatusById(String id, int status) {
-        HelpProposal entity = offerRepository.findById(id).orElseThrow();
+        HelpProposal entity = offerRepository.findById(id)
+                .orElseThrow(() -> new ApiRequestException(NOT_FOUND));
         entity.setStatus(status);
         offerRepository.save(entity);
     }

@@ -16,6 +16,7 @@ import ua.nure.proposalservice.service.OfferService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class OfferController {
     private OfferService offerService;

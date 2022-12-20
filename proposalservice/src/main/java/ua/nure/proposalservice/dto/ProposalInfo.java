@@ -1,17 +1,15 @@
 package ua.nure.proposalservice.dto;
 
 import lombok.Data;
-import ua.nure.proposalservice.model.Volunteer;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class ProposalInfo {
     private String id;
+    private List<PhotoInfo> photos;
     private String name;
-    private String ownerId;
+    private VolunteerInfo owner;
     private String description;
     private int status;
     private String createdAt;
