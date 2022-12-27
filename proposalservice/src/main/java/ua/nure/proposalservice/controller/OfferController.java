@@ -146,7 +146,7 @@ public class OfferController {
 
     @PostMapping("/api/v1/proposals/{id}/reply")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @Operation(summary = "Set proposal status to 2000 by id")
+    @Operation(summary = "Respond to volunteer's proposal by id")
     @ApiResponses({
             @ApiResponse(responseCode = "202", description = "Proposal status edited",
                     content = @Content(mediaType = "application/json",

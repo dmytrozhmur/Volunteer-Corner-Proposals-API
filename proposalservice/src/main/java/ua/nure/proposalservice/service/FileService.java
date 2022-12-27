@@ -28,7 +28,6 @@ import java.util.UUID;
 @Log4j2
 @Service
 public class FileService {
-
     private final Path fileStorageLocation;
     private final BlobServiceClient blobServiceClient;
     private final PhotoInfoMapper infoMapper;
@@ -51,15 +50,6 @@ public class FileService {
         } catch (IOException e) {
             log.error("Could not create the directory where the uploaded files will be stored.", e);
         }
-    }
-
-    public Path getFileStorageLocation() {
-        try {
-            Files.createDirectories(this.fileStorageLocation);
-        } catch (IOException e) {
-            log.error("Could not create the directory where the uploaded file will be stored.", e);
-        }
-        return fileStorageLocation;
     }
 
     public PhotoInfo uploadAndDownloadFile(@NonNull MultipartFile file, String containerName, String proposalId) {
