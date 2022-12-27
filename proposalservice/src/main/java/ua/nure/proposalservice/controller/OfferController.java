@@ -16,6 +16,7 @@ import ua.nure.proposalservice.service.OfferService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class OfferController {
     private OfferService offerService;
@@ -162,5 +163,19 @@ public class OfferController {
     public void respondToProposal(@PathVariable String id,
                                   @RequestBody ProposalResponseCreation creation) {
         offerService.addResponse(id, creation);
+    }
+
+    @GetMapping("/api/v1/proposals/current")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Get my proposals")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Got list of current user's proposals",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProposalInfo[].class))),
+            @ApiResponse(responseCode = "401", description = "Unknown sender",
+                    content = @Content(mediaType = "application/json"))
+    })
+    public List<ProposalInfo> myProposals() {
+        return offerService.getCurrProposals();
     }
 }

@@ -21,11 +21,11 @@ public class User {
     private Set<Role> roles;
     @Column(name = "FirstName") private String firstName;
     @Column(name = "LastName") private String lastName;
-    @Column(name = "Patronymic") private String patronymic;
     @Column(name = "UserName") private String login;
     @Column(name = "Email") private String email;
     @Column(name = "PasswordHash") private String password;
     @Column(name = "PhoneNumber")  private String phone;
     @Column(name = "PhoneNumberConfirmed") private boolean phoneConfirmed;
     @Column(name = "TwoFactorEnabled") private boolean twoFactorEnabled;
+    @Column(name = "ContactsDisplayPolicy") private int policy;
 }

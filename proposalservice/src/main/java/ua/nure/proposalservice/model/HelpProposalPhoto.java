@@ -8,11 +8,11 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity(name = "HelpProposalsPhotos")
+@Entity(name = "HelpProposalPhotos")
 public class HelpProposalPhoto {
     @Id
-    @Column(name = "Id", nullable = false, length = 450) private String id;
-    @OneToOne
+    @Column(name = "Id") private String id;
+    @ManyToOne
     @JoinColumn(name = "HelpProposalId", referencedColumnName = "Id") HelpProposal helpProposal;
     @Column(name = "FilePath") private String filePath;
     @Column(name = "CreatedBy") private String createdBy;
